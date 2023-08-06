@@ -20,28 +20,31 @@ const db = knex({
   },
 });
 
-const app = express();
+// const app = express();
 
-app.use(cors());
-app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
+// app.use(cors());
+// app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
+module.exports = {
+  '/': async (req, res) => {
+    res.send('It is working!');
+  },
+  '/signin': async (req, res) => {
+    signin.handleSignin(db, bcrypt)(req, res);
+  },
+  '/register': async (req, res) => {
+    register.handleRegister(req, res, db, bcrypt);
+  },
+  '/profile/:id': async (req, res) => {
+    profile.handleProfileGet(req, res, db);
+  },
+  '/image': async (req, res) => {
+    image.handleImage(req, res, db);
+  },
+  '/imageurl': async (req, res) => {
+    image.handleApiCall(req, res);
+  },
+};
 
-app.get('/', (req, res) => {
-  res.send('it is working!');
-});
-app.post('/signin', signin.handleSignin(db, bcrypt));
-app.post('/register', (req, res) => {
-  register.handleRegister(req, res, db, bcrypt);
-});
-app.get('/profile/:id', (req, res) => {
-  profile.handleProfileGet(req, res, db);
-});
-app.put('/image', (req, res) => {
-  image.handleImage(req, res, db);
-});
-app.post('/imageurl', (req, res) => {
-  image.handleApiCall(req, res);
-});
-
-app.listen(3000, () => {
-  console.log(`app is running on port 3000`);
-});
+// app.listen(3000, () => {
+//   console.log(`app is running on port 3000`);
+// });

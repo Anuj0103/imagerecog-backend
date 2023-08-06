@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/", "dest": "/api/index.js" },
+    { "src": "/signin", "dest": "/api/signin.js" },
+    { "src": "/register", "dest": "/api/register.js" },
+    { "src": "/profile/:id", "dest": "/api/profile.js" },
+    { "src": "/image", "dest": "/api/image.js" },
+    { "src": "/imageurl", "dest": "/api/imageurl.js" }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
